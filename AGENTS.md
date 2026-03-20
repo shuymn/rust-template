@@ -3,11 +3,11 @@
 
 ## Build, Test, and Development Commands
 
-- Use Task ([Taskfile.yml](Taskfile.yml)) as the default interface; run `task` to list all tasks, `task --summary <name>` for details
-- `task build` / `task test` / `task lint` / `task fmt` / `task check` — primary workflow; `task check` runs formatting check, Clippy, tests, `cargo doc`, and build (see [docs/tooling.md](docs/tooling.md))
-- Rust-native equivalents work without Task: `cargo build`, `cargo test`, `cargo fmt --all`, `cargo clippy --workspace --all-targets --all-features --locked -- -D warnings` (same as `task lint`; Clippy levels from `Cargo.toml` `[lints]`, thresholds from `clippy.toml`, groups from crate attributes in `src/main.rs`)
+- Use Task ([Taskfile.yml](Taskfile.yml)) as the default interface
+- `task build` / `task test` / `task lint` / `task fmt` / `task check` — primary workflow; `task check` runs formatting check, Clippy, tests, `cargo doc`, and build; `task check:fast` skips tests and docs (see [docs/tooling.md](docs/tooling.md))
+- Rust-native equivalents work without Task: `cargo build`, `cargo test`, `cargo fmt --all`, `cargo clippy --workspace --all-targets --all-features --locked -- -D warnings` (same as `task lint`; see [docs/tooling.md](docs/tooling.md) for Clippy policy details)
 - Prefer `cargo add` / editing `Cargo.toml` for dependencies; run `cargo build` or `task build` after manifest changes
-- Toolchain is pinned via [rust-toolchain.toml](rust-toolchain.toml): **nightly** with `rustfmt` and `clippy` so [rustfmt.toml](rustfmt.toml) can use unstable formatting options
+- `unsafe_code` is **forbidden** and `unwrap`/`expect`/`todo`/`dbg!` are **denied** via `Cargo.toml` `[lints]` — applies to all code including tests
 
 ## Git Conventions
 
@@ -16,7 +16,7 @@
 
 ## Documentation Scope
 
-- Keep this file limited to always-on repository rules.
+<!-- Keep this file limited to always-on repository rules. -->
 - Read `docs/coding.md` before writing or modifying any Rust code.
 - Read `docs/testing.md` before writing or modifying tests.
 - Read `docs/tooling.md` when working with build, CI, hooks, or adding tools.
