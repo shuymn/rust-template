@@ -1,0 +1,3 @@
+# Match CI: setup-rust-toolchain defaults to RUSTFLAGS=-D warnings for compile steps.
+[env]
+RUSTFLAGS = "-D warnings"
