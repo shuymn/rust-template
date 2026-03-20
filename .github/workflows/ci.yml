@@ -1,4 +1,3 @@
-# CI for github.com/shuymn/rust-template (template); placeholders updated by `task -t .taskfiles/template.yml init`
 name: CI
 
 on:
@@ -23,12 +22,10 @@ jobs:
         with:
           persist-credentials: false
 
-      # rust-lang org action; pin SHA. cache: false avoids nested Swatinem/rust-cache.
-      # Default RUSTFLAGS=-D warnings applies to compile steps (clippy, test, build); rustfmt ignores it.
       - name: Set up Rust
         uses: actions-rust-lang/setup-rust-toolchain@150fca883cd4034361b621bd4e6a9d34e5143606 # v1.15.4
         with:
-          cache: false
+          cache: true
 
       - name: Set up Task
         uses: shuymn/github-actions/.github/actions/setup-task@a8738b31f97fc93c8d7254ea6a9524152997bf68
@@ -56,7 +53,7 @@ jobs:
       - name: Set up Rust
         uses: actions-rust-lang/setup-rust-toolchain@150fca883cd4034361b621bd4e6a9d34e5143606 # v1.15.4
         with:
-          cache: false
+          cache: true
 
       - name: Set up Task
         uses: shuymn/github-actions/.github/actions/setup-task@a8738b31f97fc93c8d7254ea6a9524152997bf68
@@ -81,7 +78,7 @@ jobs:
       - name: Set up Rust
         uses: actions-rust-lang/setup-rust-toolchain@150fca883cd4034361b621bd4e6a9d34e5143606 # v1.15.4
         with:
-          cache: false
+          cache: true
 
       - name: Set up Task
         uses: shuymn/github-actions/.github/actions/setup-task@a8738b31f97fc93c8d7254ea6a9524152997bf68
