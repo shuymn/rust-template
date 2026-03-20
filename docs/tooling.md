@@ -13,7 +13,7 @@ Read this file when working with build, CI, hooks, or adding tools.
 - Hooks run in `piped` mode, can auto-stage formatter fixes, and skip merge or rebase flows.
 - CI mirrors the same `task` commands used locally (`fmt:check`, `lint`, `test`, `build`).
 - Rust on CI uses [actions-rust-lang/setup-rust-toolchain](https://github.com/actions-rust-lang/setup-rust-toolchain) pinned to a full commit SHA (under the `rust-lang` GitHub org). Caching is disabled so the workflow does not pull in an extra third-party cache action; toolchain install still uses the official `https://sh.rustup.rs` script inside that composite action.
-- That action sets **`RUSTFLAGS=-D warnings`** by default for the job, so `task test` and `task build` in CI fail on **rustc** warnings too (not only Clippy). Locally the same applies via [`.cargo/config.toml`](../.cargo/config.toml) `[env]`.
+- That action sets **`RUSTFLAGS=-D warnings`** by default for the job, so `task test` and `task build` in CI fail on **rustc** warnings too (not only Clippy). Locally, important lints are already denied via `Cargo.toml` `[lints]`; remaining rustc warnings are caught by `task lint` and CI.
 - The default toolchain is **nightly** ([rust-toolchain.toml](../rust-toolchain.toml)) so `cargo fmt` respects unstable options in [rustfmt.toml](../rustfmt.toml). For a quieter baseline, pin nightly to a specific date in `rust-toolchain.toml`.
 - **Clippy policy** (this is the canonical reference; other docs defer here):
   - [Cargo.toml](../Cargo.toml) `[lints.rust]` / `[lints.clippy]`: denies common footguns (`unwrap_used`, `expect_used`, `todo`, `dbg_macro`, etc.). These apply to all code including tests.
